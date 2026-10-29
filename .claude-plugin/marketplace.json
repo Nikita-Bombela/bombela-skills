@@ -1,8 +1,14 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "bombela-skills",
-  "owner": { "name": "Nikita Bombela" },
+  "owner": {
+    "name": "Nikita Bombela"
+  },
   "plugins": [
-    { "name": "bombela", "description": "Personal custom skills.", "source": "./" }
+    {
+      "name": "bombela",
+      "description": "Personal custom skills.",
+      "source": "./"
+    }
   ]
 }

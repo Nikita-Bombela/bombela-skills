@@ -13,6 +13,8 @@ Skills show up as `/bombela:<name>` in the next session.
 
 ## Update
 
+Bump `version` in `.claude-plugin/plugin.json` before pushing. `plugin update` compares versions and skips when it is unchanged.
+
 ```
 claude plugin marketplace update bombela-skills
 claude plugin update bombela@bombela-skills
