@@ -66,15 +66,17 @@ Severity:
 
 ## 4. Report
 
-Weakest point first. One verdict line, then numbered findings:
+Plain markdown, no code fence. Weakest point first: one verdict line, then numbered findings with a blank line between each. Shape:
 
-```
 weakest point: export endpoint loads every row into memory, one large tenant OOMs the worker.
 
 1. [critical][memory] export builds the full CSV in memory: tenant with 2M rows, worker dies. src/export.ts:40
+
 2. [high][db] order list runs one query per item: 500 items = 501 queries. src/orders/list.ts:88
+
 3. [low][cpu] tags deduped with a nested loop, fine below ~10k tags. src/tags.ts:12
-```
+
+rest holds.
 
 Don't list what's fine. "rest holds" is the whole line.
 
