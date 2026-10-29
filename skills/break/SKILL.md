@@ -66,9 +66,9 @@ Severity:
 
 ## 4. Report
 
-Plain markdown, no code fence. Weakest point first: one verdict line, then numbered findings with a blank line between each. Shape:
+The report is the body of your reply, written in the same markdown as any other answer: a bold verdict line, then a numbered list with a blank line between findings. Example reply:
 
-weakest point: export endpoint loads every row into memory, one large tenant OOMs the worker.
+**Weakest point:** export endpoint loads every row into memory, one large tenant OOMs the worker.
 
 1. [critical][memory] export builds the full CSV in memory: tenant with 2M rows, worker dies. src/export.ts:40
 
@@ -76,8 +76,8 @@ weakest point: export endpoint loads every row into memory, one large tenant OOM
 
 3. [low][cpu] tags deduped with a nested loop, fine below ~10k tags. src/tags.ts:12
 
-rest holds.
+Rest holds.
 
-Don't list what's fine. "rest holds" is the whole line.
+Don't list what's fine. "Rest holds" is the whole line.
 
 End with one next action: which finding to fix first, or the smallest repro that proves it (input size, script, query to run locally).
