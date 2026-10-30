@@ -53,9 +53,10 @@ For every entry point ask: what input size or traffic makes this fall over?
 
 For each finding, note:
 
-- **trigger:** the input or traffic that breaks it
 - **blast radius:** one request, the whole process, or the DB for everyone
 - **reach:** any anonymous user, logged-in user, or admin only
+- **confidence:** how sure you are it really breaks. high: traced end to end, nothing upstream bounds it. medium: hinges on something not in the code (indexes, config, real data size). low: the pattern is there, but an unread path may already guard it
+- **boe:** back-of-the-envelope load that tips it over, with the math shown: 1,000 requests from 20 users, 300 requests with 1,000 nodes each, 2M rows × ~1KB = 2GB vs a 512MB worker
 
 Severity:
 
@@ -70,11 +71,11 @@ The report is the body of your reply, written in the same markdown as any other 
 
 **Weakest point:** export endpoint loads every row into memory, one large tenant OOMs the worker.
 
-1. [critical][memory] export builds the full CSV in memory: tenant with 2M rows, worker dies. src/export.ts:40
+1. [critical][memory][confidence: high] export builds the full CSV in memory, worker dies (boe: one tenant with 2M rows × ~1KB = 2GB vs 512MB worker). src/export.ts:40
 
-2. [high][db] order list runs one query per item: 500 items = 501 queries. src/orders/list.ts:88
+2. [high][db][confidence: high] order list runs one query per item (boe: 500 items = 501 queries, 20 users refreshing once a second = ~10k queries/s). src/orders/list.ts:88
 
-3. [low][cpu] tags deduped with a nested loop, fine below ~10k tags. src/tags.ts:12
+3. [low][cpu][confidence: medium] tags deduped with a nested loop (boe: fine below ~10k tags, 10k tags = 100M comparisons per request). src/tags.ts:12
 
 Rest holds.
 
