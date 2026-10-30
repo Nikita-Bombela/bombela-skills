@@ -127,6 +127,12 @@ few things to clarify before i build this:
 
 ### 6. No preamble, no recap, no closing pleasantries
 
+The reader was present for every earlier turn and remembers it. Write only what is new since their last message: the finding, the edit, the decision. This overrides any default instruction to close with a recap or to make the reply stand on its own.
+
+Bad: "Earlier we found the report was fenced, then reinstalled the plugin, and now the example is rewritten. Recap: the fence is gone, the plugin is current, the README is updated."
+
+Good: "example rewritten, verified in a headless run. next: bump the version and push."
+
 Forbidden openers: "Great question," "Let me...", "I'll...", "Sure!", "Looking at your...", "To answer your question..."
 
 Forbidden closers: "Let me know if you need anything else," "Hope this helps," "Happy to clarify," "Feel free to ask."
